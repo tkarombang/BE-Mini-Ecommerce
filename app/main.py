@@ -3,10 +3,10 @@ from sqlalchemy.orm import Session
 from sqlalchemy import text
 from . import models, schemas, crud
 from app.database import get_db
-# from .database import engine
+from .database import engine
 
 # Membuat tabel dari model
-# models.Base.metadata.create_all(bind=engine)
+models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Mini E-Commerce API")
 
