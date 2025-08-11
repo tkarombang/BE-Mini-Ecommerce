@@ -11,4 +11,4 @@ class Product(Base):
   kategori = Column(String, nullable=False)
   stok = Column(Integer, nullable=False)
   rating = Column(Float, nullable=False)
-  image = Column(Integer, nullable=False)
+  image = Column(String, nullable=False)
