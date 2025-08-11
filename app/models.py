@@ -25,7 +25,7 @@ class Order(Base):
   created_at = Column(DateTime(timezone=True), server_default=func.now())
 
   # RELASI KE ORDER ITEMS
-  items = relationship("OrderItems", back_populates="order", cascade="all, delete")
+  items = relationship("OrderItem", back_populates="order", cascade="all, delete")
 
 class OrderItem(Base):
   __tablename__ = "order_item"

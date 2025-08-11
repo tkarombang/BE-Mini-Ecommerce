@@ -1,4 +1,5 @@
-from pydantic import BaseModel, EmailStr
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, EmailStr
 from typing import List
 
 # PRODUCT SCHEMA start
@@ -17,8 +18,7 @@ class ProductCreate(ProductState):
 class Product(ProductState):
   id: int
 
-  class Config:
-    orm_mode = True
+model_config = ConfigDict(from_attributes=True)
 # PRODUCT SCHEMA end
 
 
@@ -35,8 +35,15 @@ class OrderItemCreate(OrderItemBase):
 class OrderItemResponse(OrderItemBase):
   id: int
 
-  class Config:
-    from_attributes = True #UNTUK ORM MODE
+model_config = ConfigDict(from_attributes=True)#UNTUK ORM MODE
+
+class OrderOut(BaseModel):
+  id: int
+  total_price: float
+  created_at: datetime
+  items: List[OrderItemResponse]
+
+model_config = ConfigDict(from_attributes=True)
 # ORDER ITEM SCHEMA end
 
 
@@ -54,6 +61,5 @@ class OrderResponse(OrderBase):
   id: int
   items: List[OrderItemResponse]
 
-  class Config:
-    from_attributes = True
+model_config = ConfigDict(from_attributes=True)
 #ORDER SCHEMA end
