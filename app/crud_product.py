@@ -24,7 +24,7 @@ def create_product(db: Session, product: schemas.ProductCreate):
 
 def update_product(db: Session, product_id: int, product_update: schemas.ProductUpdate):
   up_product = get_product(db, product_id)
-  for key, value in product_update.model_dump().items:
+  for key, value in product_update.model_dump().items():
     setattr(up_product, key, value)
   db.commit()
   db.refresh(up_product)

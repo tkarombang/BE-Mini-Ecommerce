@@ -38,11 +38,11 @@ def read_product(product_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Product tidak ada")
     return db_product
 
-@app.put("/product/{product_id}", response_model=schemas.ProductOut)
+@app.put("/products/{product_id}", response_model=schemas.ProductOut)
 def upd_product(product_id: int, product_upd: schemas.ProductUpdate ,db: Session = Depends(get_db)):
-    crud_product.update_product(db, product_id, product_upd)
+    return crud_product.update_product(db, product_id, product_upd)
 
-@app.delete("/product/{product_id}", response_model=schemas.ProductOut)
+@app.delete("/products/{product_id}", response_model=schemas.ProductOut)
 def del_product(product_id: int, db: Session = Depends(get_db)):
     return crud_product.delete_product(db, product_id)
 # ENDPOINT_product_END

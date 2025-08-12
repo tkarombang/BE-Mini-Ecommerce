@@ -6,9 +6,9 @@ from typing import List
 class ProductState(BaseModel):
   nama: str = Field(..., min_length=3, max_length=50)
   price: float = Field(..., gt=0)
-  deskripsi: str = Field(..., min_leng=5)
+  deskripsi: str = Field(..., min_length=20)
   kategori: str 
-  stok: int = Field(..., ge=0)
+  stok: int = Field(..., gt=0)
   rating: float = Field(..., ge=0, le=5)
   image: str
 
