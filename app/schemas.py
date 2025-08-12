@@ -1,15 +1,15 @@
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, EmailStr
+from pydantic import BaseModel, Field, ConfigDict, EmailStr
 from typing import List
 
 # PRODUCT SCHEMA start
 class ProductState(BaseModel):
-  nama: str
-  price: float
-  deskripsi: str
-  kategori: str
-  stok: int
-  rating: float
+  nama: str = Field(..., min_length=3, max_length=50)
+  price: float = Field(..., gt=0)
+  deskripsi: str = Field(..., min_leng=5)
+  kategori: str 
+  stok: int = Field(..., ge=0)
+  rating: float = Field(..., ge=0, le=5)
   image: str
 
 class ProductCreate(ProductState):
