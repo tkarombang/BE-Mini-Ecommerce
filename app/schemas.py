@@ -15,42 +15,42 @@ class ProductState(BaseModel):
 class ProductCreate(ProductState):
   pass
 
-class Product(ProductState):
-  id: int
+class ProductUpdate(ProductState):
+  pass
 
-model_config = ConfigDict(from_attributes=True)
+class ProductOut(ProductState):
+  id: int = Field(..., gt=0)
+  model_config = ConfigDict(from_attributes=True)
 # PRODUCT SCHEMA end
 
 
 
 # ORDER ITEM SCHEMA start
 class OrderItemBase(BaseModel):
-  product_id: int
-  quantity: int
-  price: int
+  product_id: int = Field(..., gt=0)
+  quantity: int = Field(..., gt=0)
+  price: int = Field(..., gt=0)
 
 class OrderItemCreate(OrderItemBase):
   pass
 
 class OrderItemResponse(OrderItemBase):
   id: int
-
-model_config = ConfigDict(from_attributes=True)#UNTUK ORM MODE
+  model_config = ConfigDict(from_attributes=True)
 
 class OrderOut(BaseModel):
   id: int
   total_price: float
   created_at: datetime
   items: List[OrderItemResponse]
-
-model_config = ConfigDict(from_attributes=True)
+  model_config = ConfigDict(from_attributes=True)
 # ORDER ITEM SCHEMA end
 
 
 
 # ORDER SCHEMA start
 class OrderBase(BaseModel):
-  customer_name: str
+  customer_name: str 
   customer_email: EmailStr
   total_price: float
 
@@ -60,6 +60,5 @@ class OrderCreate(OrderBase):
 class OrderResponse(OrderBase):
   id: int
   items: List[OrderItemResponse]
-
-model_config = ConfigDict(from_attributes=True)
+  model_config = ConfigDict(from_attributes=True)
 #ORDER SCHEMA end

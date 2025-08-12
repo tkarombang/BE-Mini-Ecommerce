@@ -20,23 +20,31 @@ def read_root(session: Session = Depends(get_db)):
     
 
 # ENDPOINT_product_START
-@app.post("/products", response_model=schemas.Product)
+@app.post("/products", response_model=schemas.ProductOut)
 def create_product(product: schemas.ProductCreate, db: Session = Depends(get_db)):
     return crud_product.create_product(db=db, product=product)
 
-@app.get("/products", response_model=list[schemas.Product])
+@app.get("/products", response_model=list[schemas.ProductOut])
 def read_products(skip: int = 0, limit = 10, db: Session = Depends(get_db)):
     db_product_all =  crud_product.get_products(db, skip=skip, limit=limit)
     if not db_product_all:
         raise HTTPException(status_code=404, detail="Semua Produk Tidak Ada")
     return db_product_all
 
-@app.get("/products/{product_id}", response_model=schemas.Product)
+@app.get("/products/{product_id}", response_model=schemas.ProductOut)
 def read_product(product_id: int, db: Session = Depends(get_db)):
     db_product = crud_product.get_product(db, product_id=product_id)
     if db_product is None:
         raise HTTPException(status_code=404, detail="Product tidak ada")
     return db_product
+
+@app.put("/product/{product_id}", response_model=schemas.ProductOut)
+def upd_product(product_id: int, product_upd: schemas.ProductUpdate ,db: Session = Depends(get_db)):
+    crud_product.update_product(db, product_id, product_upd)
+
+@app.delete("/product/{product_id}", response_model=schemas.ProductOut)
+def del_product(product_id: int, db: Session = Depends(get_db)):
+    return crud_product.delete_product(db, product_id)
 # ENDPOINT_product_END
 
 # ENDPOINT_orderss_START
