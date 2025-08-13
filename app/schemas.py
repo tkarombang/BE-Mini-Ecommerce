@@ -32,7 +32,6 @@ class ProductOut(ProductState):
 # PRODUCT SCHEMA end
 
 
-
 # ORDER ITEM SCHEMA start
 class OrderItemBase(BaseModel):
   product_id: int
@@ -42,46 +41,30 @@ class OrderItemBase(BaseModel):
 class OrderItemCreate(OrderItemBase):
   pass
 
-class OrderItemResponse(OrderItemBase):
+class OrderItemResponse(BaseModel):
   id: int
-  model_config = ConfigDict(from_attributes=True)
-# ORDER ITEM SCHEMA end
-
-# GABUNG start
-class ProductOutForOrderItem(BaseModel):
-  id: int
-  nama: str
-  image: str
-  price: float
-  deskripsi: str
-  kategori: str
-  stok: int
-  rating: float
-  model_config = ConfigDict(from_attributes=True)
-
-class OrderItemWithProduct(BaseModel):
-  id: int
-  product: ProductOutForOrderItem
+  product_id: int
   quantity: int
   price: float
+  products: "ProductOut"
   model_config = ConfigDict(from_attributes=True)
-
-# GABUNG ends
+# ORDER ITEM SCHEMA end
 
 
 # ORDER SCHEMA start
 class OrderBase(BaseModel):
-  customer_name: Optional[str] = None
-  customer_email: Optional[EmailStr] = None
-  # total_price: float 
+  total_price: float 
 
 class OrderCreate(OrderBase):
+  total_price: float
   items: List[OrderItemCreate]
 
-class OrderResponse(OrderBase):
+class OrderResponse(BaseModel):
   id: int
   total_price: float
+  # customer_name: Optional[str] = None
+  # customer_email: Optional[EmailStr] = None
   created_at: datetime
-  items: List[OrderItemWithProduct]
+  items: List[OrderItemResponse]  
   model_config = ConfigDict(from_attributes=True)
 #ORDER SCHEMA end
