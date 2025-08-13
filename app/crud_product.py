@@ -1,18 +1,15 @@
+from typing import List, Optional
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from app import models, schemas
 
 # CRUD RPODUCT start 
-def get_products(db: Session, skip: int = 0, limit: int=10):
+def get_products(db: Session, skip: int = 0, limit: int=10) -> List[models.Product]:
   products = db.query(models.Product).offset(skip).limit(limit).all()
-  if not products:
-    raise HTTPException(status_code=404, detail="Produk Gagal Menampilkan")
   return products
 
-def get_product(db: Session, product_id: int):
+def get_product(db: Session, product_id: int) -> Optional[models.Product]:
   product_by_id = db.query(models.Product).filter(models.Product.id == product_id).first()
-  if not product_by_id:
-    raise HTTPException(status_code=404, detail="Produk dengan ID Gagal Menampilkan")
   return product_by_id
 
 def create_product(db: Session, product: schemas.ProductCreate):
@@ -22,10 +19,16 @@ def create_product(db: Session, product: schemas.ProductCreate):
   db.refresh(db_product)
   return db_product
 
-def update_product(db: Session, product_id: int, product_update: schemas.ProductUpdate):
+def update_product(db: Session, product_id: int, product_update: schemas.ProductUpdate) -> models.Product:
   up_product = get_product(db, product_id)
-  for key, value in product_update.model_dump().items():
+  if not up_product:
+    raise HTTPException(status_code=404, detail="Product Tidak Ditemukan")
+  
+  update_data = product_update.model_dump(exclude_unset=True)
+
+  for key, value in update_data.items():
     setattr(up_product, key, value)
+  
   db.commit()
   db.refresh(up_product)
   return up_product
