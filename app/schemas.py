@@ -52,9 +52,6 @@ class OrderItemResponse(BaseModel):
 
 
 # ORDER SCHEMA start
-# class OrderBase(BaseModel):
-#   total_price: float 
-
 class OrderCreate(BaseModel):
   # total_price: float
   items: List[OrderItemCreate]
