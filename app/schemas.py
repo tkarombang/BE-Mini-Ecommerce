@@ -46,7 +46,7 @@ class OrderItemResponse(BaseModel):
   product_id: int
   quantity: int
   price: float
-  products: "ProductOut"
+  product: "ProductOut"
   model_config = ConfigDict(from_attributes=True)
 # ORDER ITEM SCHEMA end
 
