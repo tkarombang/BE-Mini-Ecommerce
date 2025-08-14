@@ -52,11 +52,11 @@ class OrderItemResponse(BaseModel):
 
 
 # ORDER SCHEMA start
-class OrderBase(BaseModel):
-  total_price: float 
+# class OrderBase(BaseModel):
+#   total_price: float 
 
-class OrderCreate(OrderBase):
-  total_price: float
+class OrderCreate(BaseModel):
+  # total_price: float
   items: List[OrderItemCreate]
 
 class OrderResponse(BaseModel):
