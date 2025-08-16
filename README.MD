@@ -89,9 +89,9 @@ Aplikasi mini e-commerce sederhana yang memungkinkan pengguna untuk melihat daft
 docs: https://www.postgresql.org/download/windows/
 
 ## Menjalankan Aplikasi
-    ```bash
-    uvicorn app.main:app --reload
-    ```
+```bash
+uvicorn app.main:app --reload
+```
 ### STRUKTUR FOLDER
     
 ```bash
@@ -120,13 +120,13 @@ docs: https://www.postgresql.org/download/windows/
     - Response:
     ```json
     {
-        nama: "RK Tactichal Keyboard",
-        price: 12000000,
-        deskripsi: "Keyboard mekanikal dengan pencahayaan RGB yang halus dan responsif.",
-        kategori: "Aksesoris Komputer",
-        stok: 5,
-        rating: 4.6,
-        image: "/assets/keyboard.jpg",
+        "nama": "RK Tactichal Keyboard",
+        "price": 12000000,
+        "deskripsi": "Keyboard mekanikal dengan pencahayaan RGB yang halus dan responsif.",
+        "kategori": "Aksesoris Komputer",
+        "stok": 5,
+        "rating": 4.6,
+        "image": "/assets/keyboard.jpg",
     }
     ```
 
