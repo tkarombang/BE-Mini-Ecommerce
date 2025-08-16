@@ -60,7 +60,7 @@ Aplikasi mini e-commerce sederhana yang memungkinkan pengguna untuk melihat daft
 
 1. Clone repository ini ke dalam direktori lokal:
    ```bash
-   git clone https://github.com/username/repository.git
+   git clone https://github.com/tkarombang/repository.git
    ```
 2. Masuk kedalam direktori project
     ```bash
