@@ -56,8 +56,8 @@ def create_order(db: Session, order: schemas.OrderCreate) -> models.Order:
 
   #6.Buat_Objek_untuk_Pesanan_Utama
   db_order = models.Order(
-    # customer_name=order.customer_name,
-    # customer_email=order.customer_email,
+    customer_name=order.customer_name,
+    customer_email=order.customer_email,
     total_price=total_price,
     items=order_items_list
   )
@@ -146,8 +146,8 @@ def update_order(db: Session, order_id: int, order_data: schemas.OrderCreate) ->
 
   ##4:Simpan Perubahan
   db_order.total_price = total_price
-  # db_order.customer_name = order_data.customer_name
-  # db_order.customer_email = order_data.customer_email
+  db_order.customer_name = order_data.customer_name
+  db_order.customer_email = order_data.customer_email
   db.add_all(order_items)
 
   db.commit()

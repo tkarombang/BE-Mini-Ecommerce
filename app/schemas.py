@@ -54,13 +54,15 @@ class OrderItemResponse(BaseModel):
 # ORDER SCHEMA start
 class OrderCreate(BaseModel):
   # total_price: float
+  customer_name: Optional[str] = None
+  customer_email: Optional[EmailStr] = None
   items: List[OrderItemCreate]
 
 class OrderResponse(BaseModel):
   id: int
   total_price: float
-  # customer_name: Optional[str] = None
-  # customer_email: Optional[EmailStr] = None
+  customer_name: Optional[str] = None
+  customer_email: Optional[EmailStr] = None
   created_at: datetime
   items: List[OrderItemResponse]  
   model_config = ConfigDict(from_attributes=True)
