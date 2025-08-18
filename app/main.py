@@ -14,7 +14,7 @@ app = FastAPI()
 models.Base.metadata.create_all(bind=engine)
 
 origins = [
-    "https://web-production-7435b.up.railway.app",
+    "https://fe-mini-ecommerce.vercel.app",
     "http://localhost:3000"
 ]
 
