@@ -1,5 +1,3 @@
-# from contextlib import asynccontextmanager
-# from typing import List
 from typing import List
 from fastapi import Depends, FastAPI, HTTPException, APIRouter
 import sqlalchemy
@@ -9,29 +7,28 @@ from app import crud_analytics, crud_product, models, schemas, crud_order
 from app.database import get_db, engine
 from fastapi.middleware.cors import CORSMiddleware
 
+# app = FastAPI(title="Mini E-Commerce API")
+app = FastAPI()
+
 # Membuat tabel dari model
 models.Base.metadata.create_all(bind=engine)
-# @asynccontextmanager
-# async def lifespan(app: FastAPI):
-#     # Menggunakan fungsi create_db_and_tables() untuk membuat tabel saat aplikasi dimulai
-#     print("Menciptakan tabel database...")
-#     yield
-#     print("Server mati.")
-
-router = APIRouter()
-# app = FastAPI(title="Mini E-Commerce API")
 
 origins = [
+    "https://web-production-7435b.up.railway.app",
     "http://localhost:3000"
 ]
 
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=origins,
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+router = APIRouter()
+
+
 
 @router.get("/")
 def read_root(session: Session = Depends(get_db)):
@@ -98,13 +95,4 @@ def delete_order(order_id: int, db: Session = Depends(get_db)):
 # ENDPOINT_orderss_END
 
 
-app = FastAPI()
-
 app.include_router(router)
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
