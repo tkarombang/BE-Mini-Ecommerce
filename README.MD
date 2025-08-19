@@ -136,9 +136,8 @@ uvicorn app.main:app --reload
     - Body:
     ```json
     {
-        <!-- "name": "John Doe", --> (on Dev) 
-        <!-- "email": "johndoe@example.com",  --> (on Dev) 
-        <!-- "address": "123 Main St, City, Country", --> (on Dev) 
+        "customer_name": "Muhammad Azwar Anas", (on Dev) 
+        "customer_email": "muhanaz@gmail.com",  (on Dev) 
         "items": [
             {"product_id": 1, "quantity": 2},
         ]
